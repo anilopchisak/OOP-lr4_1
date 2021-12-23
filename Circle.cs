@@ -28,7 +28,7 @@ namespace ооп_лаба_4_часть_1
             this.select = false;
         }
 
-        public void draw(PaintEventArgs e)
+        override public void draw(PaintEventArgs e)
         {
             Pen pen;
             if (select == true)
@@ -39,29 +39,29 @@ namespace ооп_лаба_4_часть_1
             e.Graphics.DrawEllipse(pen, x - r, y - r, 2 * r, 2 * r);
         }
 
-        public bool ifselected(int _x, int _y)
+        override public bool ifselected(int _x, int _y)
         {
             if (Math.Pow((_x - x), 2) + Math.Pow((_y - y), 2) <= Math.Pow(this.r, 2))
                 return true;
             else return false;
         }
 
-        public void set_select(bool _select)
+        override public void set_select(bool _select)
         {
             this.select = _select;
         }
 
-        public bool get_select()
+        override public bool get_select()
         {
             return select;
         }
 
-        public int get_x()
+        override public int get_x()
         {
             return x;
         }
 
-        public int get_y()
+        override public int get_y()
         {
             return y;
         }

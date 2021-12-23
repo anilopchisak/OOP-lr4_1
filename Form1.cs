@@ -27,71 +27,53 @@ namespace ооп_лаба_4_часть_1
             if (e.Button == MouseButtons.Left)
             {
                 bool new_circle = true;
-                for (int i = 0; i < storage.getCount(); i++)
+                for (int i = 0; i < storage.getCount(); i++) //для каждого объекта массива
                 {
-                    if (storage.get_current_obj(i).ifselected(e.X, e.Y) == true)
+                    if (storage.get_current_obj(i).ifselected(e.X, e.Y) == true) //если на объект нажали
                     {
-                        
                         new_circle = false;
-                        if (ctrl == true)
+                        if (ctrl == true) 
                             storage.get_current_obj(i).set_select(true);
-                        //Refresh();
                         else
                         {
                             for (int j = 0; j < storage.getCount(); j++)
                             {
-                                if (storage.get_current_obj(j).get_select() == true/* && storage.get_current_obj(j).ifselected(e.X, e.Y) == false*/)
+                                if (storage.get_current_obj(j).get_select() == true) //снимаем выделение у всех объектов
                                     storage.get_current_obj(j).set_select(false);
-                                storage.get_current_obj(i).set_select(true);
+                               
                             }
-                            //Refresh();
+                            storage.get_current_obj(i).set_select(true); //ставим выделение у объекта на который нажали
                         }
                     }
                 }
 
                 if (new_circle == true)
                 {
-                    for (int i = 0; i < storage.getCount(); i++) storage.get_current_obj(i).set_select(false);
+                    for (int i = 0; i < storage.getCount(); i++) storage.get_current_obj(i).set_select(false); //снимаем выделение у всех объектов
                     circle = new Circle(e.X, e.Y);
                     index = index + 1;
                     storage.addObject(index, circle);
                     storage.get_current_obj(index).set_select(true);
-                    //Refresh();
                 }
                 Refresh();
             }
         }
 
-        private void btn_Clear_Click(object sender, EventArgs e)
-        {
-            Refresh();
-        }
-
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.ControlKey) ctrl = true;
-            if (e.KeyCode == Keys.ShiftKey)
+            if (e.KeyCode == Keys.Delete)
             {
-                int num_selected = 0;
                 for (int i = 0; i < storage.getCount(); i++)
                     if (storage.get_current_obj(i).get_select() == true)
-                        num_selected = num_selected + 1;
-
-                while (num_selected != 0)
-                {
-                    for (int i = 0; i < storage.getCount(); i++)
-                        if (storage.get_current_obj(i).get_select() == true)
-                        {
-                            storage.get_current_obj(i).set_select(false);
-                            storage.deleteObject(i);
-                            num_selected = num_selected - 1;
-                        }
-                }
+                    {
+                        storage.get_current_obj(i).set_select(false);
+                        storage.deleteObject(i);
+                    }
                 storage.change_array();
                 storage.set_current_index(0);
                 index = storage.getCount() - 1;
                 
-                Controls.Clear();
                 Refresh();
             }
         }

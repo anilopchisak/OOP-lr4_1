@@ -18,7 +18,7 @@ namespace ооп_лаба_4_часть_1
 		private int _size; //размер массива
 		private int current;
 
-		public Storage() //constructor with parameters
+		public Storage() 
 		{
 			_size = 0;
 			_count = 0;
@@ -38,7 +38,8 @@ namespace ооп_лаба_4_часть_1
 
 		public void addObject(int index, Circle b)
 		{
-			_objects.Add(new BaseObject(b));
+			//_objects.Add(new BaseObject(b));
+			_objects.Add(b);
 			_count = _count + 1;
 			_size = _size + 1;
 			//setObject(index, b);
@@ -76,10 +77,11 @@ namespace ооп_лаба_4_часть_1
 			current = index;
         }
 
-		public Circle get_current_obj(int current)
+		public BaseObject get_current_obj(int current)
         {
-			return _objects[current]._circle; 
-        }
+			//return _objects[current]._circle;
+			return _objects[current];
+		}
 
 		public int get_current_index()
         {
